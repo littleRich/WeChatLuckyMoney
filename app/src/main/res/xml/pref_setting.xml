@@ -1,0 +1,75 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/setting">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="open"
+            android:title="@string/pref_open" />
+
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="open"
+            android:key="not_self"
+            android:title="@string/pre_not_self" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="open"
+            android:key="not_whisper"
+            android:title="@string/pref_whisper" />
+
+        <EditTextPreference
+            android:dependency="open"
+            android:hint="@string/not_contains_hit"
+            android:key="not_contains"
+            android:title="@string/not_contains" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="open"
+            android:key="delay"
+            android:title="@string/pref_delay" />
+
+        <me.veryyoung.wechat.luckymoney.RangePreference
+            end="delay_max"
+            start="delay_min"
+            android:defaultValue="true"
+            android:dependency="delay"
+            android:title="@string/pref_delay_time" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="open"
+            android:key="show_wechat_id"
+            android:title="@string/pref_show_wechat_id" />
+
+        <EditTextPreference
+            android:dependency="open"
+            android:hint="@string/black_list_hit"
+            android:key="black_list"
+            android:title="@string/black_list" />
+
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="quick_open"
+            android:title="@string/quick_open" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:key="author"
+            android:summary="veryyoung"
+            android:title="@string/author" />
+        <Preference
+            android:key="donate_alipay"
+            android:title="@string/alipay_donate" />
+        <Preference
+            android:key="donate_wechat"
+            android:title="@string/wechat_donate" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

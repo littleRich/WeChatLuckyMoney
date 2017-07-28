@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    signingConfigs {
+        debug {
+            storeFile file('keystore/xuqingfu-release.jks')
+            storePassword '123456'
+            keyAlias 'littleRich'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file("keystore/xuqingfu-release.jks")
+            storePassword "123456"
+            keyAlias "littleRich"
+            keyPassword "123456"
+        }
+    }
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    defaultConfig {
+        applicationId "me.veryyoung.wechat.luckymoney"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 22
+        versionName "1.2.5"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    provided files('libs/XposedBridgeApi-82.jar')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
