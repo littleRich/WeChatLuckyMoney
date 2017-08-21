@@ -76,8 +76,19 @@ new GsonBuilder().create().toJson(object)
 
 3、修改Hook到对象的值  
 当我们Hook拦截获取到程序中的某个对象时，想要修改该对象中的某个字段的值，可以使用XposedHelpers.setXXXField(Object obj, String fieldName, XXX value)修改字段值。举个例子吧：  
-```
-//示例代码
+```java
+Class userModel = XposedHelpers.findClass("com.fanwe.live.model.UserModel", classLoader);
+XposedHelpers.findAndHookMethod("com.fanwe.live.fragment.LiveTabMeNewFragment", classLoader, "bindNormalData", userModel, new XC_MethodHook() {
+    @Override
+    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+        super.afterHookedMethod(param);
+        Object user = param.args[0];
+        Logger.json(new GsonBuilder().create().toJson(user));
+        XposedHelpers.setObjectField(user, "nick_nameFormat", "Hello LittleRich!");
+        XposedHelpers.setLongField(user, "diamonds", 1000);
+        param.setResult(user);
+    }
+});
 ```  
 
 
