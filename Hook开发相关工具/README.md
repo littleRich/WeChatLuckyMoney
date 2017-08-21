@@ -1,5 +1,5 @@
 ## Hook相关技巧
-1、针对Hook multidex中的函数
+1、针对Hook multidex中的函数  
 使用xposed hook其方法的时候，如果方法位于默认dex中是可以的正常hook，但是如果方法位于dex分包中xposed就会报错提示所要hook的方法所在类无法找到。这种需要先去hook Application的attach方法，然后再hook第二个dex的方法，其实更像是手动去找，为什么需要attach，因为attach方法的参数里带有上下文的context，如果用xposed去hook非默认dex文件的类就会发生ClassNotFoundError，要解决这个问题，我们需要拿到对应dex文件的上下文环境。  
 
 要分析这个问题的原因以及解决办法，就要先了解multidex的载入过程以及xposed的hook时机。[[Android逆向随笔之遇见MultiDex](https://www.secpulse.com/archives/52719.html "解释Hook multidex的问题")]  
@@ -24,9 +24,9 @@ dex分包加载大致流程如下,可以得出分包是滞后主包不少时间�
 	            return;
 	        }
 	
-			/**
-			 * 显示当前栈顶的Activity的类名，便于快速定位到需要Hook的位置
-			 */
+		/**
+		 * 显示当前栈顶的Activity的类名，便于快速定位到需要Hook的位置
+		 */
 	        findAndHookMethod("android.app.Activity", loadPackageParam.classLoader, "onResume", new XC_MethodHook() {
 	            @Override
 	            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -43,9 +43,9 @@ dex分包加载大致流程如下,可以得出分包是滞后主包不少时间�
 	            }
 	        });
 			
-			/**
-			 * 先要获取到APP的Application上下文
-			 */
+		/**
+		 * 先要获取到APP的Application上下文
+		 */
 	        findAndHookMethod("android.app.Application", loadPackageParam.classLoader, "attach", Context.class, new XC_MethodHook() {
 	            @Override
 	            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
