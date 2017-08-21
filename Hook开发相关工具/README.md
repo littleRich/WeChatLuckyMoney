@@ -74,6 +74,13 @@ dex分包加载大致流程如下,可以得出分包是滞后主包不少时间�
 new GsonBuilder().create().toJson(object)
 ```
 
+3、修改Hook到对象的值  
+当我们Hook拦截获取到程序中的某个对象时，想要修改该对象中的某个字段的值，可以使用XposedHelpers.setXXXField(Object obj, String fieldName, XXX value)修改字段值。举个例子吧：  
+```
+//示例代码
+```  
+
+
 ## Hook开发相关工具
 
 1、当前Activity  
