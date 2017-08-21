@@ -1,3 +1,10 @@
+## Xposed相关API  
+这个不管是大佬还是新手，绝逼都需要的开发文档，想要提升的一定要好好研读啦。  
+xposed javadoc：[http://api.xposed.info](http://api.xposed.info "Xposed API")  
+xposed官网：http://repo.xposed.info/  
+xda论坛的xposed版块：http://forum.xda-developers.com/xposed  
+XposedBridgeApi地址：https://jcenter.bintray.com/de/robv/android/xposed/api/  
+
 ## Hook相关技巧
 1、针对Hook multidex中的函数  
 使用xposed hook其方法的时候，如果方法位于默认dex中是可以的正常hook，但是如果方法位于dex分包中xposed就会报错提示所要hook的方法所在类无法找到。这种需要先去hook Application的attach方法，然后再hook第二个dex的方法，其实更像是手动去找，为什么需要attach，因为attach方法的参数里带有上下文的context，如果用xposed去hook非默认dex文件的类就会发生ClassNotFoundError，要解决这个问题，我们需要拿到对应dex文件的上下文环境。  
